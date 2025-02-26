@@ -1,5 +1,5 @@
 use ray_tracing::{
-    camera::Camera,
+    camera::CameraBuilder,
     colour::Colour,
     hittable::HittableList,
     material::{Dielectric, Lambertian, Metal},
@@ -45,17 +45,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         material_right,
     )));
 
-    let mut cam = Camera::default();
-    cam.aspect_ratio = 16.0 / 9.0;
-    cam.image_width = 400;
-    cam.samples_per_pixel = 10;
-    cam.max_depth = 50;
-    cam.lookfrom = Point3::new(-2.0, 2.0, 1.0);
-    cam.lookat = Point3::new(0.0, 0.0, -1.0);
-    cam.vup = Vec3::new(0.0, 1.0, 0.0);
-    cam.vfov = 20.0;
-    cam.defocus_angle = 10.0;
-    cam.focus_dist = 3.4;
+    let mut cam = CameraBuilder::default()
+        .aspect_ratio(16.0 / 9.0)
+        .image_width(400)
+        .samples_per_pixel(100)
+        .max_depth(50)
+        .vfov(20.0)
+        .lookfrom(Point3::new(-2.0, 2.0, 1.0))
+        .lookat(Point3::new(0.0, 0.0, -1.0))
+        .vup(Vec3::new(0.0, 1.0, 0.0))
+        .defocus_angle(10.0)
+        .focus_dist(3.4)
+        .build();
 
     cam.render(stdout, &mut world)?;
     Ok(())

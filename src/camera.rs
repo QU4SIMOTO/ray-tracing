@@ -1,7 +1,7 @@
 use std::io::Write;
 
 use crate::{
-    colour::{write_colour, Colour},
+    colour::Colour,
     hittable::{HitRecord, Hittable},
     interval::Interval,
     random::{random_f32, random_in_unit_disk},
@@ -79,7 +79,7 @@ impl Camera {
                     let r = self.get_ray(i, j);
                     pixel_colour += self.ray_colour(&r, self.max_depth, world);
                 }
-                write_colour(&mut stdout, &(self.pixel_sample_scale * pixel_colour))?;
+                write!(&mut stdout, "{}", &(self.pixel_sample_scale * pixel_colour))?;
             }
         }
 

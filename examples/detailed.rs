@@ -3,7 +3,7 @@ use ray_tracing::{
     colour::Colour,
     hittable::HittableList,
     material::{Dielectric, Lambertian, Metal},
-    random::{random_f32, random_f32_bounded, random_vec3, random_vec3_bounded},
+    random::{random_f32, random_f32_bounded},
     sphere::Sphere,
     Point3, Vec3,
 };
@@ -34,12 +34,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             if (center - Point3::new(4.0, 0.2, 0.0)).length() > 0.9 {
                 if choose_mat < 0.8 {
                     // diffuse
-                    let albedo = random_vec3() * random_vec3();
+                    let albedo = Colour::random() * Colour::random();
                     let sphere_material = Rc::new(Lambertian::new(&albedo));
                     world.add(Rc::new(Sphere::new(center, 0.2, sphere_material)));
                 } else if choose_mat < 0.95 {
                     // metal
-                    let albedo = random_vec3_bounded(0.5, 1.0);
+                    let albedo = Colour::random_bounded(0.5, 1.0);
                     let fuzz = random_f32_bounded(0.0, 0.5);
                     let sphere_material = Rc::new(Metal::new(&albedo, fuzz));
                     world.add(Rc::new(Sphere::new(center, 0.2, sphere_material)));

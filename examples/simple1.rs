@@ -1,29 +1,21 @@
 use ray_tracing::{
-    camera::CameraBuilder, colour::Colour, hittable::HittableList, material::Lambertian,
-    sphere::Sphere, Point3, Vec3,
+    camera::CameraBuilder, colour::Colour, hittable::HittableList, hittable_list,
+    material::Lambertian, sphere::Sphere, Point3, Vec3,
 };
 use std::rc::Rc;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let stdout = std::io::stdout();
 
-    let mut world = HittableList::default();
-
     let r = (std::f32::consts::PI / 4.0).cos();
 
     let material_left = Rc::new(Lambertian::new(&Colour::new(0.0, 0.0, 1.0)));
     let material_right = Rc::new(Lambertian::new(&Colour::new(1.0, 0.0, 0.0)));
 
-    world.add(Rc::new(Sphere::new(
-        Point3::new(-r, 0.0, -1.0),
-        r,
-        material_left,
-    )));
-    world.add(Rc::new(Sphere::new(
-        Point3::new(r, 0.0, -1.0),
-        r,
-        material_right,
-    )));
+    let mut world = hittable_list![
+        Rc::new(Sphere::new(Point3::new(-r, 0.0, -1.0), r, material_left,)),
+        Rc::new(Sphere::new(Point3::new(r, 0.0, -1.0), r, material_right,)),
+    ];
 
     let mut cam = CameraBuilder::default()
         .aspect_ratio(16.0 / 9.0)

@@ -16,6 +16,10 @@ impl HittableList {
     pub fn clear(&mut self) {
         self.objects.clear();
     }
+
+    pub fn len(&self) -> usize {
+        self.objects.len()
+    }
 }
 
 impl Hittable for HittableList {
@@ -42,19 +46,82 @@ impl Hittable for HittableList {
     }
 }
 
-#[macro_export]
-macro_rules! hittable_list {
-    () => {
-        HittableList::default()
-    };
-}
+pub mod macros {
+    #[macro_export]
+    macro_rules! hittable_list {
+        () => {
+            HittableList::default()
+        };
+        ($($element:expr),+ $(,)*) => {{
+            let mut h = HittableList::default();
+            $(h.add($element);)*
+            h
+        }};
+    }
 
-#[cfg(test)]
-mod tests {
-    use crate::hittable::HittableList;
+    #[cfg(test)]
+    mod tests {
+        use crate::{
+            colour::Colour, hittable::HittableList, material::Lambertian, sphere::Sphere, Point3,
+        };
+        use std::rc::Rc;
 
-    #[test]
-    fn foo() {
-        hittable_list![];
+        #[test]
+        fn hittable_list_empty() {
+            assert_eq!(hittable_list![].len(), 0);
+        }
+
+        #[test]
+        fn hittable_list_single_element() {
+            assert_eq!(
+                hittable_list![Rc::new(Sphere::new(
+                    Point3::new(-1.0, 0.0, -1.0),
+                    1.0,
+                    Rc::new(Lambertian::new(&Colour::new(0.0, 0.0, 1.0))),
+                ))]
+                .len(),
+                1
+            );
+        }
+
+        #[test]
+        fn hittable_list_multiple_elements() {
+            assert_eq!(
+                hittable_list![
+                    Rc::new(Sphere::new(
+                        Point3::new(-1.0, 0.0, -1.0),
+                        1.0,
+                        Rc::new(Lambertian::new(&Colour::new(0.0, 0.0, 1.0))),
+                    )),
+                    Rc::new(Sphere::new(
+                        Point3::new(-1.0, 0.0, -1.0),
+                        1.0,
+                        Rc::new(Lambertian::new(&Colour::new(0.0, 0.0, 1.0))),
+                    ))
+                ]
+                .len(),
+                2
+            );
+        }
+
+        #[test]
+        fn hittable_list_trailing() {
+            assert_eq!(
+                hittable_list![
+                    Rc::new(Sphere::new(
+                        Point3::new(-1.0, 0.0, -1.0),
+                        1.0,
+                        Rc::new(Lambertian::new(&Colour::new(0.0, 0.0, 1.0))),
+                    )),
+                    Rc::new(Sphere::new(
+                        Point3::new(-1.0, 0.0, -1.0),
+                        1.0,
+                        Rc::new(Lambertian::new(&Colour::new(0.0, 0.0, 1.0))),
+                    )),
+                ]
+                .len(),
+                2
+            );
+        }
     }
 }

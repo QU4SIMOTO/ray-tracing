@@ -2,14 +2,16 @@ use std::io::Write;
 
 use crate::{
     colour::{write_colour, Colour},
-    degrees_to_radians,
     hittable::{HitRecord, Hittable},
     interval::Interval,
-    random_f32, random_in_unit_disk, Point3, Ray, Vec3,
+    random::{random_f32, random_in_unit_disk},
+    util::degrees_to_radians,
+    Point3, Ray, Vec3,
 };
 
 pub struct Camera {
     /// Ratio of image width over height.
+    #[allow(unused)]
     aspect_ratio: f32,
     /// Rendered image width in pixels.
     image_width: u32,
@@ -18,16 +20,21 @@ pub struct Camera {
     /// Maximum number of ray bounces into scene.
     max_depth: u32,
     /// Vertical view angle (field of view)
+    #[allow(unused)]
     vfov: f32,
     /// Point camera is looking from
+    #[allow(unused)]
     lookfrom: Point3,
     /// Point camera is looking at
+    #[allow(unused)]
     lookat: Point3,
     /// Camera-relative "up" direction
+    #[allow(unused)]
     vup: Vec3,
     /// Variation angle of rays through each pixel
     defocus_angle: f32,
     /// Distance from camera lookfrom point to plane of perfect focus
+    #[allow(unused)]
     focus_dist: f32,
     /// Rendered image height
     image_height: u32,
@@ -42,10 +49,13 @@ pub struct Camera {
     /// Color scale factor for a sum of pixel samples
     pixel_sample_scale: f32,
     /// Camera frame basis vector
+    #[allow(unused)]
     u: Vec3,
     /// Camera frame basis vector
+    #[allow(unused)]
     v: Vec3,
     /// Camera frame basis vector
+    #[allow(unused)]
     w: Vec3,
     /// Defocus disk horizontal radius
     defocus_disk_u: Vec3,

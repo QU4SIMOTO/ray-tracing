@@ -1,6 +1,9 @@
 use crate::{
-    colour::Colour, hittable::HitRecord, is_vec3_near_zero, random_f32, random_unit_vector,
-    reflect, refract, Ray,
+    colour::Colour,
+    hittable::HitRecord,
+    random::{random_f32, random_unit_vector},
+    util::{is_vec3_near_zero, reflect, refract},
+    Ray,
 };
 
 pub trait Material {

@@ -1,11 +1,9 @@
 use ray_tracing::{
     camera::CameraBuilder,
-    colour::Colour,
     hittable::HittableList,
     material::{Dielectric, Lambertian, Metal},
     random::{random_f32, random_f32_bounded},
-    sphere::Sphere,
-    Point3, Vec3,
+    Colour, Point3, Sphere, Vec3,
 };
 use std::rc::Rc;
 

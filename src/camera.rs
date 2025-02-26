@@ -1,12 +1,11 @@
 use std::io::Write;
 
 use crate::{
-    colour::Colour,
     hittable::{HitRecord, Hittable},
     interval::Interval,
     random::{random_f32, random_in_unit_disk},
     util::degrees_to_radians,
-    Point3, Ray, Vec3,
+    Colour, Point3, Ray, Vec3,
 };
 
 pub struct Camera {

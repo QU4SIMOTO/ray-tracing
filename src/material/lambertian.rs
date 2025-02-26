@@ -1,5 +1,5 @@
 use crate::{
-    colour::Colour, hittable::HitRecord, random::random_unit_vector, util::is_vec3_near_zero, Ray,
+    hittable::HitRecord, random::random_unit_vector, util::is_vec3_near_zero, Colour, Ray,
 };
 
 use super::Material;

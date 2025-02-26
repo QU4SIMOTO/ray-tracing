@@ -1,4 +1,4 @@
-use crate::{colour::Colour, hittable::HitRecord, Ray};
+use crate::{hittable::HitRecord, Colour, Ray};
 
 pub trait Material {
     #[allow(unused_variables)]

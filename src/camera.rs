@@ -78,7 +78,7 @@ impl Camera {
                     let r = self.get_ray(i, j);
                     pixel_colour += self.ray_colour(&r, self.max_depth, world);
                 }
-                write!(&mut stdout, "{}", &(self.pixel_sample_scale * pixel_colour))?;
+                writeln!(&mut stdout, "{}", &(self.pixel_sample_scale * pixel_colour))?;
             }
         }
 

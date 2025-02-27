@@ -11,6 +11,7 @@ pub use sphere::Sphere;
 
 pub mod camera;
 pub mod hittable;
+/// Interval utility.
 pub mod interval;
 pub mod material;
 pub mod random;

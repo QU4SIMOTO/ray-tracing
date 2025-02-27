@@ -6,13 +6,27 @@ use crate::{
 };
 use std::rc::Rc;
 
+/// A sphere in 3D space, defined by its center, radius, and material.
 pub struct Sphere {
+    /// The center point of the sphere.
     center: Point3,
+    /// The radius of the sphere.
     radius: f32,
+    /// The material the sphere is made of.
     mat: Rc<dyn Material>,
 }
 
 impl Sphere {
+    /// Creates a new sphere with the given center, radius, and material.
+    ///
+    /// # Arguments
+    ///
+    /// * `center` - A `Point3` representing the center of the sphere.
+    /// * `radius` - A `f32` representing the radius of the sphere.
+    /// * `mat` - A `Rc<dyn Material>` representing the material of the sphere.
+    ///
+    /// # Returns
+    /// * A new `Sphere` instance.
     pub fn new(center: Point3, radius: f32, mat: Rc<dyn Material>) -> Self {
         Self {
             center,
@@ -23,6 +37,15 @@ impl Sphere {
 }
 
 impl Hittable for Sphere {
+    /// Determines if a ray hits the sphere and updates the hit record accordingly.
+    ///
+    /// # Arguments
+    /// * `r` - A reference to the `Ray` being cast.
+    /// * `ray_t` - An `Interval` representing the range of acceptable t values for the ray.
+    /// * `rec` - A mutable reference to a `HitRecord` to be updated if the ray hits the sphere.
+    ///
+    /// # Returns
+    /// * `bool` - `true` if the ray hits the sphere, `false` otherwise.
     fn hit(&self, r: &crate::Ray, ray_t: Interval, rec: &mut HitRecord) -> bool {
         let oc = self.center - r.origin();
         let a = r.direction().length_squared();

@@ -2,6 +2,7 @@ pub use glam::Vec3;
 pub type Point3 = Vec3;
 
 mod colour;
+/// Ray of light in 3D space.
 mod ray;
 mod sphere;
 

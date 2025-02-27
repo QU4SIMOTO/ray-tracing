@@ -1,6 +1,5 @@
 use ray_tracing::{
     camera::CameraBuilder,
-    hittable::HittableList,
     hittable_list,
     material::{Dielectric, Lambertian, Metal},
     Colour, Point3, Sphere, Vec3,

@@ -11,22 +11,27 @@ impl Colour {
         Self(Vec3::new(r, g, b))
     }
 
+    /// Get the red channel of the colour.
     pub fn r(&self) -> f32 {
         self.0.x
     }
 
+    /// Get the green channel of the colour.
     pub fn g(&self) -> f32 {
         self.0.y
     }
 
+    /// Get the blue channel of the colour.
     pub fn b(&self) -> f32 {
         self.0.z
     }
 
+    /// Generate a random colour.
     pub fn random() -> Self {
         Self(random_vec3())
     }
 
+    /// Generate a random colour with each channel bounded.
     pub fn random_bounded(min: f32, max: f32) -> Self {
         Self(random_vec3_bounded(min, max))
     }

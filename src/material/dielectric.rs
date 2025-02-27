@@ -1,9 +1,8 @@
 use crate::{
-    colour::Colour,
     hittable::HitRecord,
     random::random_f32,
     util::{reflect, refract},
-    Ray,
+    Colour, Ray,
 };
 
 use super::Material;

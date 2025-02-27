@@ -49,21 +49,20 @@ impl Hittable for HittableList {
 pub mod macros {
     #[macro_export]
     macro_rules! hittable_list {
-        () => {
-            HittableList::default()
-        };
-        ($($element:expr),+ $(,)*) => {{
-            let mut h = HittableList::default();
+        ($($element:expr),*) => {{
+            #[allow(unused_mut)]
+            let mut h = $crate::hittable::HittableList::default();
             $(h.add($element);)*
             h
+        }};
+        ($($element:expr,)*) => {{
+            $crate::hittable_list![$($element),*]
         }};
     }
 
     #[cfg(test)]
     mod tests {
-        use crate::{
-            colour::Colour, hittable::HittableList, material::Lambertian, sphere::Sphere, Point3,
-        };
+        use crate::{colour::Colour, material::Lambertian, sphere::Sphere, Point3};
         use std::rc::Rc;
 
         #[test]

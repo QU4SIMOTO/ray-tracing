@@ -1,6 +1,5 @@
 use ray_tracing::{
-    camera::CameraBuilder, hittable::HittableList, hittable_list, material::Lambertian, Colour,
-    Point3, Sphere, Vec3,
+    camera::CameraBuilder, hittable_list, material::Lambertian, Colour, Point3, Sphere, Vec3,
 };
 use std::rc::Rc;
 
